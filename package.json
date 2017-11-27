@@ -1,0 +1,22 @@
+{
+  "name": "atmbot",
+  "version": "1.0.0",
+  "description": "atm",
+  "main": "index.js",
+  "scripts": {
+    "test": "ok"
+  },
+  "repository": {
+    "type": "git",
+    "url": "atmbot"
+  },
+  "keywords": [
+    "atmbot"
+  ],
+  "author": "Simone",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^3.12.0",
+    "restify": "^6.3.4"
+  }
+}
