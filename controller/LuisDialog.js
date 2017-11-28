@@ -1,5 +1,7 @@
 var builder = require('botbuilder');
 var restaurant = require('./RestaurantCard');
+var bank = require('./MyBank');
+
 // Some sections have been omitted
 
 exports.startDialog = function (bot) {
@@ -9,27 +11,9 @@ exports.startDialog = function (bot) {
 
     bot.recognizer(recognizer);
 
-    bot.dialog('NearestATM', function (session, args) {
-        if (!isAttachment(session)) {
+   
 
-            // Pulls out the food entity from the session if it exists
-            var bankEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'bank');
-
-            // Checks if the for entity was found
-            if (bankEntity) {
-                session.send('finding the nearest %s...', bankEntity.entity);
-               // Here you would call a function to get the foods nutrition information
-               restaurant.displayRestaurantCards(bankEntity.entity, "auckland", session);
-
-            } else {
-                session.send("No bank identified! Please try again");
-            }
-        }
-    }).triggerAction({
-        matches: 'NearestATM'
-    });
-
-    bot.dialog('GetFavouriteFood', [
+    bot.dialog('GetMyBank', [
         function (session, args, next) {
             session.dialogData.args = args || {};        
             if (!session.conversationData["username"]) {
@@ -45,12 +29,12 @@ exports.startDialog = function (bot) {
                     session.conversationData["username"] = results.response;
                 }
 
-                session.send("Retrieving your favourite foods");
-                food.displayFavouriteFood(session, session.conversationData["Username"]);  // <---- THIS LINE HERE IS WHAT WE NEED 
+                session.send("Retrieving your bank");
+                bank.displayMyBank(session, session.conversationData["username"]);  // <---- THIS LINE HERE IS WHAT WE NEED 
             }
         }
     ]).triggerAction({
-        matches: 'GetFavouriteFood'
+        matches: 'GetMyBank'
     });
 }
 
