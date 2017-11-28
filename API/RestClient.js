@@ -1,12 +1,14 @@
 var request = require('request');
 
-exports.getGoogleData = function getData(url,session, bankName, callback){
+exports.getBankData = function getData(url,session, callback){
 
     request.get(url, function(err,res,body){
         if(err){
             console.log(err);
         }else {
-            callback(body, bankName, session);
+            //callback(body, session);
+            console.log(body)
+            
         }
     });
 };

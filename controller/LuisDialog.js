@@ -1,6 +1,7 @@
 var builder = require('botbuilder');
 var bankcard = require('./BankCard');
 var bank = require('./MyBank');
+var customVision = require('./CustomVision');
 
 // Some sections have been omitted
 
@@ -19,7 +20,8 @@ exports.startDialog = function (bot) {
             // Checks if the food entity was found
             if (bankEntity) {
                 session.send('Looking for nearest bank %s...', bankEntity.entity);
-                bankcard.displayBankCards(bankEntity.entity, "auckland", session);
+                //bankcard.displayBankCards(bankEntity.entity, "auckland", session);
+                bankcard.displayBankCards(session);
             } else {
                 session.send("No bank identified! Please try again");
             }
@@ -139,6 +141,8 @@ function isAttachment(session) {
     if ((session.message.attachments && session.message.attachments.length > 0) || msg.includes("http")) {
         
         //call custom vision here later
+        customVision.retreiveMessage(session);
+        
         return true;
     }
     else {
