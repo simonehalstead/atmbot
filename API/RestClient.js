@@ -6,7 +6,7 @@ exports.getYelpData = function getData(url,bearer,session, callback){
         if(err){
             console.log(err);
         }else {
-            callback(body,session);
+            callback(body, session);
         }
     });
 };
